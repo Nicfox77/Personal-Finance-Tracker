@@ -2,6 +2,7 @@ package com.example.personal_finance_tracker;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -15,7 +16,7 @@ public class AddExpenseActivity extends AppCompatActivity {
     ActivityAddExpenseBinding binding;
 
     String description = "";
-    double amount;
+    double amount = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,5 +37,11 @@ public class AddExpenseActivity extends AppCompatActivity {
 
     private void getExpenseInfoFromDisplay(){
         description = binding.TransactionNameTitleTextView.getText().toString();
+
+        try{
+            amount = Double.parseDouble(binding.TransactionAmountEditTextView.getText().toString());
+        } catch (NumberFormatException e){
+            Log.d("DAC EXPENSE", "Error reading expense amount from Amount text view.");
+        }
     }
 }
