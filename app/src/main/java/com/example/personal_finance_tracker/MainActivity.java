@@ -7,12 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.room.Room;
 
 import com.example.personal_finance_tracker.DB.AppDataBase;
@@ -29,9 +26,11 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     private Button loginButton;
 
-    private EditText email;
-    private EditText password;
-
+    private EditText emailField;
+    private EditText passwordField;
+    private String userEmail;
+    private String userPassword;
+    private User user;
     private int userID = -1;
 
     FinanceTrackerDAO financeTrackerDAO;
@@ -44,22 +43,50 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        wireupDisplay();
         getDatabase();
 
-        checkForUser();
+    }
 
+    private void wireupDisplay(){
         loginButton = binding.LoginButton;
 
-        email = binding.editTextEmailAddress;
-        password = binding.editTextPassword;
-
+        emailField = binding.editTextEmailAddress;
+        passwordField = binding.editTextPassword;
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submitLogin();
+                getValuesFromDisplay();
+                if(checkForUserInDatabase()){
+                    if(!validatePassword()){
+                        Toast.makeText(MainActivity.this, "Invalid password", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Intent intent = DashboardActivity.intentFactory(getApplicationContext(), user.getUserID());
+                    }
+
+                }
+
             }
         });
+
+    }
+
+    private boolean validatePassword() {
+        return user.getPassword().equals(userPassword);
+    }
+
+    private void getValuesFromDisplay() {
+        userEmail = emailField.getText().toString();
+        userPassword = passwordField.getText().toString();
+    }
+
+    private boolean checkForUserInDatabase() {
+        user = financeTrackerDAO.getUser(userEmail);
+        if(user == null) {
+            Toast.makeText(this, "No account associated with this email address.", Toast.LENGTH_SHORT).show();
+        }
+        return true;
     }
 
     private void getDatabase() {
@@ -94,13 +121,6 @@ public class MainActivity extends AppCompatActivity {
             User defaultUser = new User("default", "password");
             financeTrackerDAO.insert(defaultUser);
         }
-
-    }
-
-    private void submitLogin() {
-        String email = this.email.getText().toString();
-        String password = this.password.getText().toString();
-
 
     }
 

@@ -1,5 +1,6 @@
 package com.example.personal_finance_tracker;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -30,5 +31,10 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public static Intent intentFactory(Context context, int userID){
+        Intent intent = new Intent(context, MainActivity.class);
+        return intent;
     }
 }
