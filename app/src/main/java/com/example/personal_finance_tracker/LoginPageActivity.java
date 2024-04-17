@@ -49,4 +49,6 @@ public class LoginPageActivity extends AppCompatActivity {
                 .financeTrackerDAO();
     }
 
+
+
 }
