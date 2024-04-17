@@ -31,6 +31,14 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
+        binding.AddBudgetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AddBudgetActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     public static Intent intentFactory(Context context, int userID){

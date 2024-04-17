@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddExpenseActivity">
+    tools:context=".CreateNewUserActivity">
 
     <View
         android:id="@+id/top_bg_view"
@@ -15,28 +15,28 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/AddExpenseTitleTextView"
+        android:id="@+id/CreateUserTitleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="28sp"
         android:textColor="@color/light_gray"
-        android:text="Add Expense"
+        android:text="Create User"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"/>
 
     <TextView
-        android:id="@+id/TransactionNameTitleTextView"
+        android:id="@+id/UserNameTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/dark_gray"
-        android:text="Transaction Name"
-        app:layout_constraintTop_toBottomOf="@+id/AddExpenseTitleTextView"
-        app:layout_constraintStart_toStartOf="@+id/TransactionNameEditTextView"
+        android:text="User Name"
+        app:layout_constraintTop_toBottomOf="@+id/CreateUserTitleTextView"
+        app:layout_constraintStart_toStartOf="@+id/UserNameEditTextView"
         android:layout_marginTop="100dp"/>
 
     <EditText
-        android:id="@+id/TransactionNameEditTextView"
+        android:id="@+id/UserNameEditTextView"
         android:layout_width="275dp"
         android:layout_height="45dp"
         android:ems="10"
@@ -44,7 +44,7 @@
         android:inputType="textAutoCorrect"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TransactionNameTitleTextView"
+        app:layout_constraintTop_toBottomOf="@+id/UserNameTitleTextView"
         android:layout_marginTop="12dp"/>
 
     <TextView
@@ -52,34 +52,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/dark_gray"
-        android:text="Amount"
-        app:layout_constraintTop_toBottomOf="@+id/TransactionNameEditTextView"
-        app:layout_constraintStart_toStartOf="@id/TransactionAmountEditTextView"
+        android:text="Password"
+        app:layout_constraintTop_toBottomOf="@+id/UserNameEditTextView"
+        app:layout_constraintStart_toStartOf="@id/NewPasswordEditTextView"
         android:layout_marginTop="16dp"/>
 
     <EditText
-        android:id="@+id/TransactionAmountEditTextView"
+        android:id="@+id/NewPasswordEditTextView"
         android:layout_width="275dp"
         android:layout_height="45dp"
         android:ems="10"
         android:background="@drawable/edit_text_border"
-        android:inputType="number"
+        android:inputType="number|text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AmountTitleTextView"
         android:layout_marginTop="12dp"/>
 
     <Button
-        android:id="@+id/AddExpenseButton"
+        android:id="@+id/CreateUserButton"
         android:textColor="@color/light_gray"
         android:layout_width="275dp"
         android:layout_height="60dp"
-        android:text="Add Expense"
+        android:text="Create User"
         android:layout_marginTop="45dp"
         android:background="@android:drawable/dialog_holo_light_frame"
         android:backgroundTint="@color/primary_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TransactionAmountEditTextView"/>
+        app:layout_constraintTop_toBottomOf="@+id/NewPasswordEditTextView"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

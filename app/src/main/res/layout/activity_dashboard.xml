@@ -141,13 +141,14 @@
             />
 
         <Button
+            android:id="@+id/AddBudgetButton"
             android:layout_gravity="center"
             android:layout_columnWeight="1"
             android:backgroundTint="@color/primary_blue"
             android:background="@android:drawable/dialog_holo_light_frame"
-            android:text="Categories"
+            android:text="Add Budget"
             android:textColor="@color/light_gray"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:layout_rowWeight="1"
             android:layout_height="100dp"
             android:layout_width="100dp"
@@ -156,7 +157,7 @@
         <Button
             android:layout_gravity="center"
             android:layout_columnWeight="1"
-            android:text="View Expenses"
+            android:text="Add User (ADMIN)"
             android:textColor="@color/light_gray"
             android:backgroundTint="@color/primary_blue"
             android:background="@android:drawable/dialog_holo_light_frame"
@@ -169,7 +170,7 @@
         <Button
             android:layout_gravity="center"
             android:layout_columnWeight="1"
-            android:text="Add Budget"
+            android:text="Delete User (ADMIN)"
             android:textColor="@color/light_gray"
             android:backgroundTint="@color/primary_blue"
             android:background="@android:drawable/dialog_holo_light_frame"
