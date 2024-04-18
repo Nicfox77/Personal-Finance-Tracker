@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 
 import com.example.personal_finance_tracker.DB.AppDataBase;
 
-@Entity(tableName = AppDataBase.USER_TABLE)
+@Entity(tableName = AppDataBase.USER_LOGIN_TABLE)
 public class User {
     @PrimaryKey(autoGenerate = true)
     private int userID;

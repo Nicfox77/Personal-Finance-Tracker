@@ -8,4 +8,11 @@
     <string name="admin_settings">Admin Settings</string>
     <string name="welcome">Welcome</string>
     <string name="username">Username</string>
+    <string name="view_expenses">View Expenses</string>
+    <string name="add_expense">Add Expense</string>
+    <string name="delete_user_admin">Delete User (ADMIN)</string>
+    <string name="add_user_admin">Add User (ADMIN)</string>
+    <string name="add_budget">Add Budget</string>
+    <string name="expenses">Expenses</string>
+    <string name="diffLabel">+/-</string>
 </resources>
