@@ -18,21 +18,28 @@ public interface FinanceTrackerDAO {
     @Insert
     void insert(User data);
 
+    @Query("SELECT * FROM " + AppDataBase.USER_LOGIN_TABLE+ " ORDER BY email")
+    List<User> getAllUsernames();
+
+    @Query("SELECT * FROM " + AppDataBase.USER_LOGIN_TABLE + " WHERE userID = :userID")
+    User getUserLoginById(int userID);
+
+    @Query("SELECT * FROM " + AppDataBase.USER_LOGIN_TABLE + " WHERE email = :email")
+    User getUserByEmail(String email);
+
+    @Query("SELECT * FROM " + AppDataBase.USER_TABLE)
+    List<FinanceTrackerUser> getAllUsers();
+
+    @Query("SELECT * FROM " + AppDataBase.USER_TABLE + " WHERE userID = :userID")
+    List<FinanceTrackerUser> getUserByID(int userID);
+
     @Insert
-    void insert(User ... users);
+    void insert(User ...users);
 
     @Update
-    void update(User ...user);
+    void update(User ...users);
 
     @Delete
     void delete(User user);
 
-    @Query("SELECT * FROM " + AppDataBase.USER_TABLE+ " ORDER BY email")
-    List<User> getAllUsers();
-
-    @Query("SELECT * FROM " + AppDataBase.USER_TABLE+ " WHERE email = :email")
-    User getUser(String email);
-
-    @Query("SELECT * FROM " + AppDataBase.USER_TABLE+ " WHERE userID = :userID")
-    User getUser(int userID);
 }

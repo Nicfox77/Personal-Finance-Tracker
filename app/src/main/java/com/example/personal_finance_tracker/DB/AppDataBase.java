@@ -10,14 +10,15 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.personal_finance_tracker.DB.entities.ExpenseLog;
 import com.example.personal_finance_tracker.User;
+import com.example.personal_finance_tracker.FinanceTrackerUser;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, ExpenseLog.class}, version = 1, exportSchema = false)
+@Database(entities = {User.class, ExpenseLog.class, FinanceTrackerUser.class}, version = 2)
 public abstract class AppDataBase extends RoomDatabase {
     public static final String DB_NAME = "finance_tracker.db";
-    public static final String TABLE_NAME = "user_login_table";
+    public static final String USER_LOGIN_TABLE = "user_login_table";
     public static final String USER_TABLE = "user_table";
     public static final String EXPENSE_LOG_TABLE = "expenseLogTable";
 
@@ -27,9 +28,9 @@ public abstract class AppDataBase extends RoomDatabase {
     private static final Object LOCK = new Object();
     public abstract FinanceTrackerDAO financeTrackerDAO();
 
-    static AppDataBase getDatabase(final Context context) {
+    public static AppDataBase getInstance(Context context) {
         if(instance == null) {
-            synchronized (AppDataBase.class) {
+            synchronized (LOCK) {
                 if(instance == null) {
                     instance = Room.databaseBuilder(
                             context.getApplicationContext(),
@@ -37,7 +38,6 @@ public abstract class AppDataBase extends RoomDatabase {
                                     DB_NAME
                             )
                             .fallbackToDestructiveMigration()
-                            .addCallback(addDefaultValues)
                             .build();
                 }
             }

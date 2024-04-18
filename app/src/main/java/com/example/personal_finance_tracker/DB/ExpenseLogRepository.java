@@ -12,14 +12,14 @@ public class ExpenseLogRepository {
     private ArrayList<ExpenseLog> allExpenses;
 
     public ExpenseLogRepository(Application application) {
-        AppDataBase db = AppDataBase.getDatabase(application);
+        AppDataBase db = AppDataBase.getInstance(application);
         this.expenseLogDAO = db.expenseLogDAO();
         this.allExpenses = (ArrayList<ExpenseLog>) this.expenseLogDAO.getAllRecords();
     }
 
-    public ArrayList<ExpenseLog> getAllExpenses() {
-        Future
-    }
+//    public ArrayList<ExpenseLog> getAllExpenses() {
+//        Future
+//    }
 
 
 }
