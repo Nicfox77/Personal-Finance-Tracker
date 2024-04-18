@@ -2,8 +2,11 @@ package com.example.personal_finance_tracker.DB;
 
 import android.app.Application;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.personal_finance_tracker.DB.entities.ExpenseLog;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ExpenseLogRepository {
@@ -18,8 +21,14 @@ public class ExpenseLogRepository {
     }
 
     public ArrayList<ExpenseLog> getAllExpenses() {
-        Future
+        return (ArrayList<ExpenseLog>) expenseLogDAO.getAllRecords();
     }
 
+    public void insertExpenseLog(ExpenseLog expenseLog) {
+        AppDataBase.databaseWriteExecutor.execute(() ->
+        {
+            expenseLogDAO.insert(expenseLog);
+        });
+    }
 
 }

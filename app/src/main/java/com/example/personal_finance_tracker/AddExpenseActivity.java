@@ -9,14 +9,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.personal_finance_tracker.DB.ExpenseLogRepository;
+import com.example.personal_finance_tracker.DB.entities.ExpenseLog;
 import com.example.personal_finance_tracker.databinding.ActivityAddExpenseBinding;
 
 public class AddExpenseActivity extends AppCompatActivity {
 
-    ActivityAddExpenseBinding binding;
+    private ActivityAddExpenseBinding binding;
+    private ExpenseLogRepository repository;
 
     String description = "";
-    double amount = 0.0;
+    int amount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +27,13 @@ public class AddExpenseActivity extends AppCompatActivity {
         binding = ActivityAddExpenseBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        repository = new ExpenseLogRepository(getApplication());
+
         binding.AddExpenseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getExpenseInfoFromDisplay();
+                insertExpenseInfoRecord();
 
                 Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
 
@@ -35,11 +42,16 @@ public class AddExpenseActivity extends AppCompatActivity {
         });
     }
 
+    private void insertExpenseInfoRecord() {
+        ExpenseLog expense = new ExpenseLog(description, amount);
+        repository.insertExpenseLog(expense);
+    }
+
     private void getExpenseInfoFromDisplay(){
         description = binding.TransactionNameTitleTextView.getText().toString();
 
         try{
-            amount = Double.parseDouble(binding.TransactionAmountEditTextView.getText().toString());
+            amount = Integer.parseInt(binding.TransactionAmountEditTextView.getText().toString());
         } catch (NumberFormatException e){
             Log.d("DAC EXPENSE", "Error reading expense amount from Amount text view.");
         }
