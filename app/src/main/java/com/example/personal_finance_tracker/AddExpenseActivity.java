@@ -35,7 +35,7 @@ public class AddExpenseActivity extends AppCompatActivity {
                 getExpenseInfoFromDisplay();
                 insertExpenseInfoRecord();
 
-                Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 
                 startActivity(intent);
             }
