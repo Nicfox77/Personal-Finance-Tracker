@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         wireupDisplay();
         getDatabase();
+        createAdmin();
         checkForUser();
 
         addExpenseButton.setOnClickListener(new View.OnClickListener() {
@@ -110,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
         //do we have any users at all?
         List<User> users = financeTrackerDAO.getAllUsernames();
-        if(users.size() <= 0) {
+        if(users.size() <= 1) {
             User defaultUser = new User("default", "password");
             financeTrackerDAO.insert(defaultUser);
         }
@@ -120,32 +121,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    private boolean validatePassword() {
-//        return user.getPassword().equals(userPassword);
-//    }
-//
-//    private void getValuesFromDisplay() {
-//        userEmail = emailField.getText().toString();
-//        userPassword = passwordField.getText().toString();
-//    }
-
-//    private boolean checkForUserInDatabase() {
-//        userID = getIntent().getIntExtra(USER_ID_KEY, -1);
-//
-//
-//        if(userID != -1) {
-//            return;
-//
-//        }
-//        Toast.makeText(this, "No account associated with this email address.", Toast.LENGTH_SHORT).show();
-//        return true;
-//    }
 
     private void getDatabase() {
         financeTrackerDAO = Room.databaseBuilder(this, AppDataBase.class, AppDataBase.DB_NAME)
                 .allowMainThreadQueries()
                 .build()
                 .financeTrackerDAO();
+    }
+
+    private void createAdmin(){
+        if(financeTrackerDAO.getUserByEmail("admin") == null){
+            User admin = new User("admin", "password", true);
+            financeTrackerDAO.insert(admin);
+        }
     }
 
 

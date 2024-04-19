@@ -2,15 +2,21 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "df5c8378ec364a8ecaf1a924a890c3ad",
+    "identityHash": "c3a1693438429ac2101382d2dc1309ad",
     "entities": [
       {
         "tableName": "user_login_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `email` TEXT, `password` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `isAdmin` INTEGER NOT NULL, `email` TEXT, `password` TEXT)",
         "fields": [
           {
             "fieldPath": "userID",
             "columnName": "userID",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isAdmin",
+            "columnName": "isAdmin",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -92,7 +98,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'df5c8378ec364a8ecaf1a924a890c3ad')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c3a1693438429ac2101382d2dc1309ad')"
     ]
   }
 }
