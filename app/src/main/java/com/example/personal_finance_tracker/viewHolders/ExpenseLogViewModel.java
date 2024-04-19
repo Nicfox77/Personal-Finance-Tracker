@@ -12,17 +12,17 @@ import java.util.List;
 
 public class ExpenseLogViewModel extends AndroidViewModel {
     private final ExpenseLogRepository repository;
-    private final LiveData<List<ExpenseLog>> allLogsById;
+    private final LiveData<List<ExpenseLog>> allExpenses;
 
-    public ExpenseLogViewModel (Application application, int userId) {
+    public ExpenseLogViewModel (Application application) {
 
         super(application);
-        repository = ExpenseLogRepository.getRepository(application);
-        allLogsById = repository.getAllLogsByUserId(userId);
+        repository = new ExpenseLogRepository(application);
+        allExpenses = repository.getAllExpenses();
     }
 
-    public LiveData<List<ExpenseLog>> getAllLogsById() {
-        return allLogsById;
+    public LiveData<List<ExpenseLog>> getAllExpenses() {
+        return allExpenses;
     }
 
     public void insert(ExpenseLog expense) {

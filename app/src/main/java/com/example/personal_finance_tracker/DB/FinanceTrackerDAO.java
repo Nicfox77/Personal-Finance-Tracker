@@ -20,11 +20,15 @@ public interface FinanceTrackerDAO {
     @Insert
     void insert(User data);
 
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(ExpenseLog expenseLog);
 
     @Query("Select * from " + AppDataBase.EXPENSE_LOG_TABLE)
-    List<ExpenseLog> getAllRecords();
+    LiveData<List<ExpenseLog>> getAllRecords();
+
+    @Query("DELETE FROM " + AppDataBase.EXPENSE_LOG_TABLE)
+    void deleteAll();
 
     @Query("SELECT * FROM " + AppDataBase.USER_LOGIN_TABLE+ " ORDER BY email")
     List<User> getAllUsernames();

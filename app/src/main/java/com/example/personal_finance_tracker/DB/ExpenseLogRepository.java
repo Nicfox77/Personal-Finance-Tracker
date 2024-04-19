@@ -11,13 +11,24 @@ import java.util.List;
 
 public class ExpenseLogRepository {
 
-    private ExpenseLogDAO expenseLogDAO;
-    private ArrayList<ExpenseLog> allExpenses;
+    private FinanceTrackerDAO financeTrackerDAO;
+    private LiveData<List<ExpenseLog>> allExpenses;
 
     public ExpenseLogRepository(Application application) {
         AppDataBase db = AppDataBase.getInstance(application);
-        this.expenseLogDAO = db.expenseLogDAO();
-        this.allExpenses = (ArrayList<ExpenseLog>) this.expenseLogDAO.getAllRecords();
+        this.financeTrackerDAO = db.financeTrackerDAO();
+        this.allExpenses = financeTrackerDAO.getAllRecords();
+    }
+
+    public LiveData<List<ExpenseLog>> getAllExpenses() {
+        return allExpenses;
+    }
+
+    public void insertExpenseLog(ExpenseLog expense) {
+        AppDataBase.databaseWriteExecutor.execute(() -> {
+            financeTrackerDAO.insert(expense);
+        });
+        //TODO: Need to implement created in Recycler View Video
     }
 
     public static ExpenseLogRepository getRepository(Application application) {
@@ -25,11 +36,9 @@ public class ExpenseLogRepository {
         return null;
     }
 
-    public LiveData<List<ExpenseLog>> getAllLogsByUserId(int userId) {
-        return expenseLogDAO.getRecordsByUserId(loggedInUserId);
-    }
+//    public LiveData<List<ExpenseLog>> getAllLogsByUserId(int userId) {
+//        return expenseLogDAO.getRecordsByUserId(loggedInUserId);
+//    }
 
-    public void insertExpenseLog(ExpenseLog expense) {
-        //TODO: Need to implement created in Recycler View Video
-    }
+
 }
