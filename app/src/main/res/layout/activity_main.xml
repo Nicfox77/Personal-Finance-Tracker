@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".DashboardActivity">
+    android:layout_height="match_parent">
 
     <View
         android:id="@+id/top_bg_view"
@@ -20,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:text="Welcome, admin02"
+        android:text="@string/welcome"
         android:textColor="@color/light_gray"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,7 +46,7 @@
         android:layout_marginEnd="40dp"
         android:background="@drawable/dashboard_bg_border"
         android:gravity="center"
-        android:text="20,000"
+        android:text="10000"
         android:textColor="@color/dark_gray"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -99,7 +98,7 @@
         android:layout_marginEnd="40dp"
         android:background="@drawable/dashboard_bg_border"
         android:gravity="center"
-        android:text="15,000"
+        android:text="5,000"
         android:textColor="@color/dark_gray"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -167,6 +166,8 @@
             android:background="@android:drawable/dialog_holo_light_frame"
             android:backgroundTint="@color/primary_blue"
             android:text="@string/add_user_admin"
+            android:visibility="invisible"
+            tools:visibility="visible"
             android:textColor="@color/light_gray"
             android:textSize="14sp" />
 
@@ -180,6 +181,8 @@
             android:background="@android:drawable/dialog_holo_light_frame"
             android:backgroundTint="@color/primary_blue"
             android:text="@string/delete_user_admin"
+            android:visibility="invisible"
+            tools:visibility="visible"
             android:textColor="@color/light_gray"
             android:textSize="14sp" />
 

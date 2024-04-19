@@ -4,9 +4,11 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.example.personal_finance_tracker.DB.entities.ExpenseLog;
 import com.example.personal_finance_tracker.FinanceTrackerUser;
 import com.example.personal_finance_tracker.User;
 
@@ -17,6 +19,12 @@ public interface FinanceTrackerDAO {
 
     @Insert
     void insert(User data);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insert(ExpenseLog expenseLog);
+
+    @Query("Select * from " + AppDataBase.EXPENSE_LOG_TABLE)
+    List<ExpenseLog> getAllRecords();
 
     @Query("SELECT * FROM " + AppDataBase.USER_LOGIN_TABLE+ " ORDER BY email")
     List<User> getAllUsernames();

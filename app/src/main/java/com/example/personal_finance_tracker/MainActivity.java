@@ -6,19 +6,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import com.example.personal_finance_tracker.DB.AppDataBase;
 import com.example.personal_finance_tracker.DB.FinanceTrackerDAO;
-import com.example.personal_finance_tracker.databinding.ActivityDashboardBinding;
 import com.example.personal_finance_tracker.databinding.ActivityMainBinding;
-import com.example.personal_finance_tracker.databinding.ActivityLoginPageBinding;
-import com.example.personal_finance_tracker.LoginPageActivity;
 
 import java.util.List;
 
@@ -35,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView totalExpenses;
     private TextView totalBudget;
     private TextView remainingBudget;
+    private TextView dashboardTitle;
+    private Button addUserButton;
+    private Button deleteUserButton;
 
 
     FinanceTrackerDAO financeTrackerDAO;
@@ -54,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
         createAdmin();
         checkForUser();
 
+        dashboardTitle.setText(String.format("Welcome %s", financeTrackerDAO.getUserLoginById(userID).getEmail()));
+        if(financeTrackerDAO.getUserLoginById(userID).isAdmin()){
+            addUserButton.setVisibility(View.VISIBLE);
+            deleteUserButton.setVisibility(View.VISIBLE);
+        }
         addExpenseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,6 +92,9 @@ public class MainActivity extends AppCompatActivity {
         totalExpenses = binding.ExpensesAmountTextView;
         totalBudget = binding.TotalBudgetAmountTextView;
         remainingBudget = binding.DiffAmountTextView;
+        dashboardTitle = binding.DashboardTitleView;
+        addUserButton = binding.AddUserAdminButton;
+        deleteUserButton = binding.DeleteUserAdminButton;
     }
 
     private void checkForUser() {

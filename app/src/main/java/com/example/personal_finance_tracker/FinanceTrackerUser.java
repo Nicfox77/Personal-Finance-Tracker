@@ -14,6 +14,8 @@ public class FinanceTrackerUser {
     @PrimaryKey(autoGenerate = true)
     private int userID;
 
+
+
     public FinanceTrackerUser(int userID) {
         this.userID = userID;
     }

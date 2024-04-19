@@ -68,9 +68,7 @@ public class LoginPageActivity extends AppCompatActivity {
                         Intent intent = MainActivity.intentFactory(getApplicationContext(), user.getUserID());
                         startActivity(intent);
                     }
-
                 }
-
             }
         });
 
