@@ -17,6 +17,9 @@ import java.util.List;
 @Dao
 public interface FinanceTrackerDAO {
 
+    @Query("SELECT * FROM " + AppDataBase.EXPENSE_LOG_TABLE + " WHERE userId = :loggedInUserId")
+    LiveData<List<ExpenseLog>> getRecordSetUserId(int loggedInUserId);
+
     @Insert
     void insert(User data);
 

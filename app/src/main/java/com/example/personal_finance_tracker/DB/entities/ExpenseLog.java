@@ -4,6 +4,8 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import com.example.personal_finance_tracker.DB.AppDataBase;
+import com.example.personal_finance_tracker.DB.FinanceTrackerDAO_Impl;
+import com.example.personal_finance_tracker.FinanceTrackerUser;
 
 import java.util.Objects;
 
@@ -15,10 +17,17 @@ public class ExpenseLog {
     private String name;
     private int amount;
 
+    private int userId;
 
-    public ExpenseLog(String name, int amount) {
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+
+    public ExpenseLog(String name, int amount, int userId) {
         this.name = name;
         this.amount = amount;
+        this.userId = userId;
     }
 
     public int getId() {
@@ -45,16 +54,21 @@ public class ExpenseLog {
         this.amount = amount;
     }
 
+    public int getUserId() {
+        return userId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ExpenseLog that = (ExpenseLog) o;
-        return id == that.id && amount == that.amount && Objects.equals(name, that.name);
+        return id == that.id && amount == that.amount && userId == that.userId && Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, amount);
+        return Objects.hash(id, name, amount, userId);
     }
 }
+

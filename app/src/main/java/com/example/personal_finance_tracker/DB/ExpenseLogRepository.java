@@ -20,8 +20,8 @@ public class ExpenseLogRepository {
         this.allExpenses = financeTrackerDAO.getAllRecords();
     }
 
-    public LiveData<List<ExpenseLog>> getAllExpenses() {
-        return allExpenses;
+    public LiveData<List<ExpenseLog>> getAllExpensesByUserId(int loggedInUserId) {
+        return financeTrackerDAO.getRecordSetUserId(loggedInUserId);
     }
 
     public void insertExpenseLog(ExpenseLog expense) {

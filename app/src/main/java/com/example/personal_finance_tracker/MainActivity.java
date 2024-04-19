@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     List<FinanceTrackerUser> users;
 
-    private int userID = -1;
+    private int userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AddExpenseActivity.class);
+                intent.putExtra("ID", userID);
                 startActivity(intent);
             }
         });
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), ViewExpensesActivity.class);
+                intent.putExtra("ID", userID);
                 startActivity(intent);
             }
         });

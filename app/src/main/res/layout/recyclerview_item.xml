@@ -8,6 +8,10 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@android:drawable/dialog_holo_light_frame"/>
+        android:background="@android:drawable/dialog_holo_light_frame"
+        android:text="Expense"
+        android:textSize="18sp"
+        android:gravity="center_vertical"
+       android:paddingLeft="20dp"/>
 
 </LinearLayout>

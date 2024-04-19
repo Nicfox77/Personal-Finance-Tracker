@@ -19,10 +19,12 @@ public class AddExpenseActivity extends AppCompatActivity {
     private ActivityAddExpenseBinding binding;
     private ExpenseLogRepository repository;
 
-    private User user;
+    private FinanceTrackerUser user;
 
     String description = "";
     int amount = 0;
+
+    int loggedInUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,20 +34,21 @@ public class AddExpenseActivity extends AppCompatActivity {
 
         repository = new ExpenseLogRepository(getApplication());
 
+        Intent intent = getIntent();
+        loggedInUserId = intent.getIntExtra("ID", -2);
+
         binding.AddExpenseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getExpenseInfoFromDisplay();
                 insertExpenseInfoRecord();
-
                 finish();
-
             }
         });
     }
 
     private void insertExpenseInfoRecord() {
-        ExpenseLog expense = new ExpenseLog(description, amount);
+        ExpenseLog expense = new ExpenseLog(description, amount, loggedInUserId);
         repository.insertExpenseLog(expense);
     }
 

@@ -66,6 +66,7 @@ public class LoginPageActivity extends AppCompatActivity {
                         Toast.makeText(LoginPageActivity.this, "Invalid password", Toast.LENGTH_SHORT).show();
                     }else{
                         Intent intent = MainActivity.intentFactory(getApplicationContext(), user.getUserID());
+
                         startActivity(intent);
                     }
                 }

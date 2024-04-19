@@ -20,7 +20,6 @@ public class ViewExpensesActivity extends AppCompatActivity {
 
     private ExpenseLogViewModel expenseViewModel;
 
-
     public static final int NEW_EXPENSE_ACTIVITY_REQUEST_CODE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +33,7 @@ public class ViewExpensesActivity extends AppCompatActivity {
 
         expenseViewModel = new ViewModelProvider(this).get(ExpenseLogViewModel.class);
 
-        expenseViewModel.getAllExpenses().observe(this, expenseLogs -> {
+        expenseViewModel.getAllExpensesById().observe(this, expenseLogs -> {
             adapter.submitList(expenseLogs);
         });
 

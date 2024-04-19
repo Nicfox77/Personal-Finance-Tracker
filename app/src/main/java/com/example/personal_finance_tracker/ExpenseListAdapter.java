@@ -14,6 +14,7 @@ public class ExpenseListAdapter extends ListAdapter<ExpenseLog, ExpenseViewHolde
         super(diffCallback);
     }
 
+    @NonNull
     @Override
     public ExpenseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return ExpenseViewHolder.create(parent);
