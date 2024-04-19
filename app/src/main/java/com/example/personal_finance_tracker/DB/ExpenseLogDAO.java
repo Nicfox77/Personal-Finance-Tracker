@@ -18,6 +18,6 @@ public interface ExpenseLogDAO {
     @Query("Select * from " + AppDataBase.EXPENSE_LOG_TABLE)
     List<ExpenseLog> getAllRecords();
 
-    @Query("SELECT * FROM " + AppDataBase.EXPENSE_LOG_TABLE + " WHERE userId = :loggedInUserId")
-    LiveData<List<ExpenseLog>> getRecordsByUserId(int loggedInUserId);
+//    @Query("SELECT * FROM " + AppDataBase.EXPENSE_LOG_TABLE + " WHERE userId = :loggedInUserId")
+//    LiveData<List<ExpenseLog>> getRecordsByUserId(int loggedInUserId);
 }

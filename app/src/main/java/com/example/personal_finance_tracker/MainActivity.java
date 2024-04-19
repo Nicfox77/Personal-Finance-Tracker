@@ -41,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
 
     private int userID = -1;
 
+    /**
+     * This method is used to create the MainActivity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         createAdmin();
         checkForUser();
 
-        dashboardTitle.setText(String.format("Welcome %s", financeTrackerDAO.getUserLoginById(userID).getEmail()));
+        dashboardTitle.setText(String.format("Welcome %s", financeTrackerDAO.getUserLoginById(userID).getUsername()));
         if(financeTrackerDAO.getUserLoginById(userID).isAdmin()){
             addUserButton.setVisibility(View.VISIBLE);
             deleteUserButton.setVisibility(View.VISIBLE);
@@ -75,16 +79,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void refreshDisplay() {
-        users = financeTrackerDAO.getUserByID(userID);
-
-        if(!users.isEmpty()) {
-            StringBuilder sb = new StringBuilder();
-            for (FinanceTrackerUser user : users) {
-                sb.append(user.toString());
-            }
-        }
-    }
+    /**
+     * This method is used to wire up the display
+     * It sets the buttons and text views to their respective views
+     */
     private void wireupDisplay(){
         addBudgetButton = binding.AddBudgetButton;
         addExpenseButton = binding.NewExpenseButton;
@@ -97,6 +95,11 @@ public class MainActivity extends AppCompatActivity {
         deleteUserButton = binding.DeleteUserAdminButton;
     }
 
+    /**
+     * This method is used to check if a user is logged in
+     * If a user is not logged in, it will redirect to the login page
+     * If a user is logged in, it will set the userID to the user's ID
+     */
     private void checkForUser() {
         userID = getIntent().getIntExtra(USER_ID_KEY, -1);
 
@@ -118,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         //do we have any users at all?
         List<User> users = financeTrackerDAO.getAllUsernames();
         if(users.size() <= 1) {
-            User defaultUser = new User("default", "password");
+            User defaultUser = new User("default", "default", "password");
             financeTrackerDAO.insert(defaultUser);
         }
 
@@ -128,6 +131,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * This method is used to get the database
+     */
     private void getDatabase() {
         financeTrackerDAO = Room.databaseBuilder(this, AppDataBase.class, AppDataBase.DB_NAME)
                 .allowMainThreadQueries()
@@ -135,14 +141,24 @@ public class MainActivity extends AppCompatActivity {
                 .financeTrackerDAO();
     }
 
+    /**
+     * This method is used to create a default admin user, if one does not exist already
+     *
+     */
     private void createAdmin(){
-        if(financeTrackerDAO.getUserByEmail("admin") == null){
-            User admin = new User("admin", "password", true);
+        if(financeTrackerDAO.getUserByUsername("admin") == null){
+            User admin = new User("admin", "admin", "password", true);
             financeTrackerDAO.insert(admin);
         }
     }
 
 
+    /**
+     * This method is used to create an intent to start the MainActivity
+     * @param context
+     * @param userID
+     * @return
+     */
     public static Intent intentFactory(Context context, int userID){
         Intent intent = new Intent(context, MainActivity.class);
         intent.putExtra(USER_ID_KEY, userID);

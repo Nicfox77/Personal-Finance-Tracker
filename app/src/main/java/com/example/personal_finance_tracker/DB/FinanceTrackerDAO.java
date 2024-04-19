@@ -26,7 +26,10 @@ public interface FinanceTrackerDAO {
     @Query("Select * from " + AppDataBase.EXPENSE_LOG_TABLE)
     List<ExpenseLog> getAllRecords();
 
-    @Query("SELECT * FROM " + AppDataBase.USER_LOGIN_TABLE+ " ORDER BY email")
+//    @Query("SELECT * FROM " + AppDataBase.EXPENSE_LOG_TABLE + " WHERE userId = :loggedInUserId")
+//    LiveData<List<ExpenseLog>> getRecordsByUserId(int loggedInUserId);
+
+    @Query("SELECT * FROM " + AppDataBase.USER_LOGIN_TABLE+ " ORDER BY username")
     List<User> getAllUsernames();
 
     @Query("SELECT * FROM " + AppDataBase.USER_LOGIN_TABLE + " WHERE userID = :userID")
@@ -50,4 +53,6 @@ public interface FinanceTrackerDAO {
     @Delete
     void delete(User user);
 
+    @Query("SELECT * FROM " + AppDataBase.USER_LOGIN_TABLE + " WHERE username = :username")
+    User getUserByUsername(String username);
 }

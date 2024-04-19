@@ -2,25 +2,18 @@ package com.example.personal_finance_tracker;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.room.Room;
 
 import com.example.personal_finance_tracker.DB.AppDataBase;
 import com.example.personal_finance_tracker.DB.FinanceTrackerDAO;
 import com.example.personal_finance_tracker.databinding.ActivityLoginPageBinding;
-import com.example.personal_finance_tracker.databinding.ActivityMainBinding;
 
 import java.util.List;
 
@@ -28,10 +21,11 @@ public class LoginPageActivity extends AppCompatActivity {
 
     ActivityLoginPageBinding binding;
     private Button loginButton;
-    private EditText emailField;
+    private Button addUserButton;
+    private EditText usernameField;
     private EditText passwordField;
 
-    private String userEmail;
+    private String username;
     private String userPassword;
     private User user;
     private int userID = -1;
@@ -51,10 +45,13 @@ public class LoginPageActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * This method is used to wire up the display
+     */
     private void wireupDisplay(){
         loginButton = binding.LoginButton;
-
-        emailField = binding.editTextEmailAddress;
+        addUserButton = binding.SignUpButton;
+        usernameField = binding.editTextUsername;
         passwordField = binding.editTextPassword;
 
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -72,26 +69,48 @@ public class LoginPageActivity extends AppCompatActivity {
             }
         });
 
+        addUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CreateNewUserActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
+    /**
+     * This method validates the entered password
+     * @return boolean
+     */
     private boolean validatePassword() {
         return user.getPassword().equals(userPassword);
     }
 
+    /**
+     * This method is used to get the values from the display
+     */
     private void getValuesFromDisplay() {
-        userEmail = emailField.getText().toString();
+        username = usernameField.getText().toString();
         userPassword = passwordField.getText().toString();
     }
 
+    /**
+     * This method is used to check if the user is in the database
+     * @return boolean
+     */
     private boolean checkForUserInDatabase() {
-        user = financeTrackerDAO.getUserByEmail(userEmail);
+        user = financeTrackerDAO.getUserByUsername(username);
         if(user == null) {
-            Toast.makeText(this, "No account associated with this email address.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No account associated with this username.", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
     }
 
+    /**
+     * This method is used to get the database
+     */
     private void getDatabase() {
         financeTrackerDAO = Room.databaseBuilder(this, AppDataBase.class, AppDataBase.DB_NAME)
                 .allowMainThreadQueries()
@@ -100,6 +119,11 @@ public class LoginPageActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * This method is used to create an intent to start the LoginPageActivity
+     * @param context
+     * @return Intent
+     */
     public static Intent intentFactory(Context context){
         Intent intent = new Intent(context, LoginPageActivity.class);
         return intent;

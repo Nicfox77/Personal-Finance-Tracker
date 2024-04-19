@@ -25,9 +25,9 @@ public class ExpenseLogRepository {
         return null;
     }
 
-    public LiveData<List<ExpenseLog>> getAllLogsByUserId(int userId) {
-        return expenseLogDAO.getRecordsByUserId(loggedInUserId);
-    }
+//    public LiveData<List<ExpenseLog>> getAllLogsByUserId(int userId) {
+//        return expenseLogDAO.getRecordsByUserId(userId);
+//    }
 
     public void insertExpenseLog(ExpenseLog expense) {
         //TODO: Need to implement created in Recycler View Video
