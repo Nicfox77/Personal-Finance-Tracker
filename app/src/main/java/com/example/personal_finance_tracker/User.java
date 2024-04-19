@@ -2,6 +2,7 @@ package com.example.personal_finance_tracker;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.example.personal_finance_tracker.DB.AppDataBase;
@@ -10,6 +11,7 @@ import com.example.personal_finance_tracker.DB.AppDataBase;
 public class User {
     @PrimaryKey(autoGenerate = true)
     private int userID;
+    private boolean isAdmin;
 
     private String email;
 
@@ -18,6 +20,12 @@ public class User {
     public User(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+    @Ignore
+    public User(String email, String password, boolean isAdmin) {
+        this.email = email;
+        this.password = password;
+        this.isAdmin = isAdmin;
     }
 
     public int getUserID() {
@@ -43,6 +51,11 @@ public class User {
         this.password = password;
     }
 
+    public boolean isAdmin() {
+        return isAdmin;
+    }
 
-
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
 }
