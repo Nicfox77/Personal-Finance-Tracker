@@ -1,5 +1,6 @@
 package com.example.personal_finance_tracker;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +19,8 @@ public class AddExpenseActivity extends AppCompatActivity {
     private ActivityAddExpenseBinding binding;
     private ExpenseLogRepository repository;
 
+    private User user;
+
     String description = "";
     int amount = 0;
 
@@ -35,9 +38,8 @@ public class AddExpenseActivity extends AppCompatActivity {
                 getExpenseInfoFromDisplay();
                 insertExpenseInfoRecord();
 
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                finish();
 
-                startActivity(intent);
             }
         });
     }
@@ -48,7 +50,7 @@ public class AddExpenseActivity extends AppCompatActivity {
     }
 
     private void getExpenseInfoFromDisplay(){
-        description = binding.TransactionNameTitleTextView.getText().toString();
+        description = binding.TransactionNameEditTextView.getText().toString();
 
         try{
             amount = Integer.parseInt(binding.TransactionAmountEditTextView.getText().toString());
@@ -56,4 +58,5 @@ public class AddExpenseActivity extends AppCompatActivity {
             Log.d("DAC EXPENSE", "Error reading expense amount from Amount text view.");
         }
     }
+
 }

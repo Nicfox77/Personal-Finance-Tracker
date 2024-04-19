@@ -73,6 +73,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        viewExpensesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ViewExpensesActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void refreshDisplay() {

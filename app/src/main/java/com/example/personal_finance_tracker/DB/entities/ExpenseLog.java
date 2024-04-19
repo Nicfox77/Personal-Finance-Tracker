@@ -15,6 +15,7 @@ public class ExpenseLog {
     private String name;
     private int amount;
 
+
     public ExpenseLog(String name, int amount) {
         this.name = name;
         this.amount = amount;
