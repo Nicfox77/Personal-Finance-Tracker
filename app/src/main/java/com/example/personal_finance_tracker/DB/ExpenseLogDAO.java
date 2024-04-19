@@ -1,5 +1,6 @@
 package com.example.personal_finance_tracker.DB;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -16,4 +17,7 @@ public interface ExpenseLogDAO {
 
     @Query("Select * from " + AppDataBase.EXPENSE_LOG_TABLE)
     List<ExpenseLog> getAllRecords();
+
+    @Query("SELECT * FROM " + AppDataBase.EXPENSE_LOG_TABLE + " WHERE userId = :loggedInUserId")
+    LiveData<List<ExpenseLog>> getRecordsByUserId(int loggedInUserId);
 }
