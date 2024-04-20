@@ -1,6 +1,5 @@
 package com.example.personal_finance_tracker;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
@@ -14,16 +13,18 @@ public class User {
     private boolean isAdmin;
 
     private String email;
-
+    private String username;
     private String password;
 
-    public User(String email, String password) {
+    public User(String email, String username, String password) {
         this.email = email;
+        this.username = username;
         this.password = password;
     }
     @Ignore
-    public User(String email, String password, boolean isAdmin) {
+    public User(String email, String username, String password, boolean isAdmin) {
         this.email = email;
+        this.username = username;
         this.password = password;
         this.isAdmin = isAdmin;
     }
@@ -57,5 +58,13 @@ public class User {
 
     public void setAdmin(boolean admin) {
         isAdmin = admin;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

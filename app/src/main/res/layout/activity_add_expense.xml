@@ -48,7 +48,7 @@
         android:layout_marginTop="12dp"/>
 
     <TextView
-        android:id="@+id/AmountTitleTextView"
+        android:id="@+id/PasswordTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/dark_gray"
@@ -66,7 +66,7 @@
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/AmountTitleTextView"
+        app:layout_constraintTop_toBottomOf="@+id/PasswordTitleTextView"
         android:layout_marginTop="12dp"/>
 
     <Button

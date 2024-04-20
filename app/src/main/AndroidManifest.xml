@@ -25,9 +25,6 @@
             android:name=".AddExpenseActivity"
             android:exported="false" />
         <activity
-            android:name=".DashboardActivity"
-            android:exported="false" />
-        <activity
             android:name=".LoginPageActivity"
             android:exported="false" />
         <activity
