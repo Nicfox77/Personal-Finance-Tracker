@@ -40,6 +40,7 @@ public class AdminAddUser extends AppCompatActivity {
     private String confirmPassword;
     private User user;
     private int userID = -1;
+    private int budget = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +111,7 @@ public class AdminAddUser extends AppCompatActivity {
 
     private boolean validatePassword() {
         if (userPassword.equals(confirmPassword)) {
-            user = new User(userEmail, username, userPassword);
+            user = new User(userEmail, username, userPassword, budget);
             financeTrackerDAO.insert(user);
             user = financeTrackerDAO.getUserByUsername(username);
             System.out.println("User ID when validating password: " + user.getUserID());

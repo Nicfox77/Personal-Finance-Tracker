@@ -5,8 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,6 +15,7 @@ import androidx.room.Room;
 
 import com.example.personal_finance_tracker.DB.AppDataBase;
 import com.example.personal_finance_tracker.DB.FinanceTrackerDAO;
+import com.example.personal_finance_tracker.DB.entities.ExpenseLog;
 import com.example.personal_finance_tracker.databinding.ActivityMainBinding;
 
 import java.util.List;
@@ -197,6 +196,9 @@ public class MainActivity extends AppCompatActivity {
         }catch (Exception e){
             System.out.println("No User Logged in");
         }
+
+        totalExpenses.setText(String.valueOf(totalExpenses()));
+
     }
 
     /**
@@ -276,6 +278,15 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(context, MainActivity.class);
         intent.putExtra(USER_ID_KEY, userID);
         return intent;
+    }
+
+    public double totalExpenses(){
+        List<ExpenseLog> expenses = financeTrackerDAO.getRecordSetUserId(userID);
+        double total = 0;
+        for(ExpenseLog expense : expenses){
+            total += expense.getAmount();
+        }
+        return total;
     }
 
 }

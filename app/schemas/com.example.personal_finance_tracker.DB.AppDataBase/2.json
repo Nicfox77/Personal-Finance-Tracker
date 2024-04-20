@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "ae1c25e79a634f261f8c5e189194e35c",
+    "identityHash": "7fda8423f16d4ed0dad4f01826042350",
     "entities": [
       {
         "tableName": "user_login_table",
@@ -91,38 +91,12 @@
         },
         "indices": [],
         "foreignKeys": []
-      },
-      {
-        "tableName": "user_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userID` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `budget` REAL NOT NULL)",
-        "fields": [
-          {
-            "fieldPath": "userID",
-            "columnName": "userID",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "budget",
-            "columnName": "budget",
-            "affinity": "REAL",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "autoGenerate": true,
-          "columnNames": [
-            "userID"
-          ]
-        },
-        "indices": [],
-        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ae1c25e79a634f261f8c5e189194e35c')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7fda8423f16d4ed0dad4f01826042350')"
     ]
   }
 }
