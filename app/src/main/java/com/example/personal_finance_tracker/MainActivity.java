@@ -1,13 +1,17 @@
 package com.example.personal_finance_tracker;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
@@ -33,13 +37,15 @@ public class MainActivity extends AppCompatActivity {
     private TextView dashboardTitle;
     private Button addUserButton;
     private Button deleteUserButton;
+    private Button logoutButton;
 
 
-    FinanceTrackerDAO financeTrackerDAO;
+    private FinanceTrackerDAO financeTrackerDAO;
 
-    List<FinanceTrackerUser> users;
-
+    private List<FinanceTrackerUser> users;
+    private SharedPreferences prefs = null;
     private int userID = -1;
+    private User user;
 
     /**
      * This method is used to create the MainActivity
@@ -51,16 +57,25 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        wireupDisplay();
+
         getDatabase();
         createAdmin();
         checkForUser();
+        addUserToPreferences(userID);
+        loginUser(userID);
+        System.out.println("User ID: " + userID);
+        wireupDisplay();
 
-        dashboardTitle.setText(String.format("Welcome %s", financeTrackerDAO.getUserLoginById(userID).getUsername()));
-        if(financeTrackerDAO.getUserLoginById(userID).isAdmin()){
-            addUserButton.setVisibility(View.VISIBLE);
-            deleteUserButton.setVisibility(View.VISIBLE);
+        try {
+            if(financeTrackerDAO.getUserLoginById(userID).isAdmin()){
+                addUserButton.setVisibility(View.VISIBLE);
+                deleteUserButton.setVisibility(View.VISIBLE);
+            }
         }
+        catch (Exception e){
+            System.out.println("No User Logged in");
+        }
+
         addExpenseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,6 +92,61 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logoutUser();
+            }
+        });
+
+    }
+
+    private void loginUser(int userID) {
+        user = financeTrackerDAO.getUserLoginById(userID);
+    }
+
+
+    private void logoutUser() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage(R.string.are_you_sure_you_want_to_logout);
+
+        builder.setPositiveButton(getString(R.string.yes),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        clearUserFromIntent();
+                        clearUserFromPreferences();
+                        userID = -1;
+                        checkForUser();
+                    }
+                });
+        builder.setNegativeButton(getString(R.string.no),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do nothing
+                    }
+                });
+        builder.create().show();
+    }
+
+
+    private void clearUserFromIntent() {
+        getIntent().putExtra(USER_ID_KEY, -1);
+    }
+
+    private void clearUserFromPreferences() {
+        addUserToPreferences(-1);
+    }
+
+
+    private void addUserToPreferences(int userID) {
+        if(prefs == null){
+            getPrefs();
+        }
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt(USER_ID_KEY, userID);
     }
 
     /**
@@ -93,6 +163,12 @@ public class MainActivity extends AppCompatActivity {
         dashboardTitle = binding.DashboardTitleView;
         addUserButton = binding.AddUserAdminButton;
         deleteUserButton = binding.DeleteUserAdminButton;
+        logoutButton = binding.logoutButton;
+        try{
+            dashboardTitle.setText(String.format("Welcome %s", financeTrackerDAO.getUserLoginById(userID).getUsername()));
+        }catch (Exception e){
+            System.out.println("No User Logged in");
+        }
     }
 
     /**
@@ -101,6 +177,7 @@ public class MainActivity extends AppCompatActivity {
      * If a user is logged in, it will set the userID to the user's ID
      */
     private void checkForUser() {
+        System.out.println("User ID: " + userID);
         userID = getIntent().getIntExtra(USER_ID_KEY, -1);
 
         if(userID != -1) {
@@ -108,26 +185,28 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+
         //do we have a user in the preferences?
-        SharedPreferences preferences = this.getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE);
-        userID = preferences.getInt(USER_ID_KEY, -1);
+        if(prefs == null){
+            getPrefs();
+        }
+        System.out.println("User ID: " + userID);
+        userID = prefs.getInt(USER_ID_KEY, -1);
+        System.out.println("User ID: " + userID);
 
         if(userID != -1) {
             //we have a user
             return;
         }
 
-
-        //do we have any users at all?
-        List<User> users = financeTrackerDAO.getAllUsernames();
-        if(users.size() <= 1) {
-            User defaultUser = new User("default", "default", "password");
-            financeTrackerDAO.insert(defaultUser);
-        }
-
+        //no user, redirect to login page
+        System.out.println("Should go to Login Page");
         Intent intent = LoginPageActivity.intentFactory(this);
         startActivity(intent);
+    }
 
+    private void getPrefs() {
+        prefs = this.getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE);
     }
 
 
@@ -149,6 +228,12 @@ public class MainActivity extends AppCompatActivity {
         if(financeTrackerDAO.getUserByUsername("admin") == null){
             User admin = new User("admin", "admin", "password", true);
             financeTrackerDAO.insert(admin);
+            System.out.println("Admin user created");
+        }
+        if(financeTrackerDAO.getUserByUsername("default") == null) {
+            User defaultUser = new User("default", "default", "password");
+            financeTrackerDAO.insert(defaultUser);
+            System.out.println("default user created");
         }
     }
 

@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:background="@drawable/bg_gradient"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient"
     tools:context=".CreateNewUserActivity">
 
     <View
@@ -13,18 +13,18 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:background="@drawable/bg_design"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/CreateUserTitleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="36sp"
-        android:textColor="@color/light_gray"
-        android:text="@string/create_user"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:text="@string/create_user"
+        android:textColor="@color/light_gray"
+        android:textSize="36sp"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/UserNameTitleTextView"
@@ -41,12 +41,15 @@
         android:id="@+id/UserNameEditTextView"
         android:layout_width="275dp"
         android:layout_height="45dp"
-        android:ems="10"
+        android:layout_marginTop="12dp"
         android:background="@drawable/edit_text_border"
+        android:ems="10"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UserNameTitleTextView"
-        android:layout_marginTop="12dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/UserNameTitleTextView" />
 
 
     <TextView
@@ -89,7 +92,10 @@
         android:layout_marginTop="4dp"
         android:background="@drawable/edit_text_border"
         android:ems="10"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:inputType="textEmailAddress"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/EmailTitleTextView" />
@@ -101,6 +107,9 @@
         android:layout_marginTop="4dp"
         android:background="@drawable/edit_text_border"
         android:ems="10"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/PasswordTitleTextView" />
@@ -112,6 +121,9 @@
         android:layout_marginTop="4dp"
         android:background="@drawable/edit_text_border"
         android:ems="10"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ConfirmPasswordTitleTextView" />

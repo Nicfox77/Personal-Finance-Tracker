@@ -68,6 +68,7 @@ public class CreateNewUserActivity extends AppCompatActivity {
                         if (!validatePassword()) {
                             Toast.makeText(CreateNewUserActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
                         } else {
+                            System.out.println("User ID when created user: " + user.getUserID());
                             Intent intent = MainActivity.intentFactory(getApplicationContext(), user.getUserID());
                             startActivity(intent);
                         }
@@ -122,6 +123,8 @@ public class CreateNewUserActivity extends AppCompatActivity {
         if (userPassword.equals(confirmPassword)) {
             user = new User(userEmail, username, userPassword);
             financeTrackerDAO.insert(user);
+            user = financeTrackerDAO.getUserByUsername(username);
+            System.out.println("User ID when validating password: " + user.getUserID());
             return true;
         }
         return false;

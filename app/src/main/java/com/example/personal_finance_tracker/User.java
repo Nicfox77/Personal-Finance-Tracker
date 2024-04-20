@@ -24,7 +24,7 @@ public class User {
     @Ignore
     public User(String email, String username, String password, boolean isAdmin) {
         this.email = email;
-
+        this.username = username;
         this.password = password;
         this.isAdmin = isAdmin;
     }
