@@ -236,6 +236,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * This method is used to get the preferences
+     * It is used to store the user's ID
+     */
     private void getPrefs() {
         prefs = this.getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE);
     }
@@ -281,6 +285,10 @@ public class MainActivity extends AppCompatActivity {
         return intent;
     }
 
+    /**
+     * This method is used to calculate the total expenses of a user
+     * @return total
+     */
     public double totalExpenses(){
         ExpenseLogRepository repository;
         repository = new ExpenseLogRepository(getApplication());
@@ -291,6 +299,10 @@ public class MainActivity extends AppCompatActivity {
             total+= log.getAmount();
         }
         return total;
+    }
+
+    public void setDifference() {
+
     }
 
 }

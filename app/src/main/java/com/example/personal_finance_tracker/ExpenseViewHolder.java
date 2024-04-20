@@ -19,6 +19,11 @@ public class ExpenseViewHolder extends RecyclerView.ViewHolder {
         expenseItemView.setText(text);
     }
 
+    /**
+     *  This method is used to create a new ExpenseViewHolder
+     * @param parent
+     * @return
+     */
     static ExpenseViewHolder create(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recyclerview_item, parent, false);

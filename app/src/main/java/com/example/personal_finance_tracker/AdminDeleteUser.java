@@ -102,6 +102,9 @@ public class AdminDeleteUser extends AppCompatActivity {
 
     }
 
+    /**
+     * Get the database
+     */
     private void getDatabase() {
         financeTrackerDAO = Room.databaseBuilder(this, AppDataBase.class, AppDataBase.DB_NAME)
                 .allowMainThreadQueries()

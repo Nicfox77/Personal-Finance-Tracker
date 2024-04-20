@@ -51,6 +51,9 @@ public class CreateNewUserActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * This method is used to wire up the display
+     */
     private void wireupDisplay(){
         returnToLoginButton = binding.ReturnToLoginButton;
         submitButton = binding.CreateUserButton;
