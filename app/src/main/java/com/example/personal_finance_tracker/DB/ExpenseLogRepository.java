@@ -8,6 +8,9 @@ import com.example.personal_finance_tracker.DB.entities.ExpenseLog;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 public class ExpenseLogRepository {
 
@@ -20,8 +23,20 @@ public class ExpenseLogRepository {
         this.allExpenses = financeTrackerDAO.getAllRecords();
     }
 
-    public LiveData<List<ExpenseLog>> getAllExpensesByUserId(int loggedInUserId) {
-        return financeTrackerDAO.getRecordSetUserId(loggedInUserId);
+    public List<ExpenseLog> getAllExpensesByUserId(int loggedInUserId) {
+        Future<ArrayList<ExpenseLog>> future = AppDataBase.databaseWriteExecutor.submit(
+                new Callable<ArrayList<ExpenseLog>>() {
+                    @Override
+                    public ArrayList<ExpenseLog> call() throws Exception {
+                        return (ArrayList<ExpenseLog>) financeTrackerDAO.getRecordSetUserId(loggedInUserId);
+                    }
+                });
+        try {
+            return future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            System.out.println("Error with future");
+        }
+        return null;
     }
 
     public void insertExpenseLog(ExpenseLog expense) {

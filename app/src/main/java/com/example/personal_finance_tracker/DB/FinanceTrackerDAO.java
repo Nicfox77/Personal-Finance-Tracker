@@ -12,13 +12,14 @@ import com.example.personal_finance_tracker.DB.entities.ExpenseLog;
 import com.example.personal_finance_tracker.FinanceTrackerUser;
 import com.example.personal_finance_tracker.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
 public interface FinanceTrackerDAO {
 
     @Query("SELECT * FROM " + AppDataBase.EXPENSE_LOG_TABLE + " WHERE userId = :loggedInUserId")
-    LiveData<List<ExpenseLog>> getRecordSetUserId(int loggedInUserId);
+    List<ExpenseLog> getRecordSetUserId(int loggedInUserId);
 
     @Insert
     void insert(User data);

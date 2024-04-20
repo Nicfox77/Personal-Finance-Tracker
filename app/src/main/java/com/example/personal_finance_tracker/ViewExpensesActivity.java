@@ -1,7 +1,9 @@
 package com.example.personal_finance_tracker;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -9,32 +11,56 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.personal_finance_tracker.DB.ExpenseLogRepository;
 import com.example.personal_finance_tracker.DB.entities.ExpenseLog;
+import com.example.personal_finance_tracker.databinding.ActivityViewExpensesBinding;
 import com.example.personal_finance_tracker.viewHolders.ExpenseLogViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ViewExpensesActivity extends AppCompatActivity {
 
-    private ExpenseLogViewModel expenseViewModel;
+    ActivityViewExpensesBinding binding;
+    private int loggedInUserId;
+
+    private ExpenseLogRepository repository;
 
     public static final int NEW_EXPENSE_ACTIVITY_REQUEST_CODE = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_expenses);
+        binding = ActivityViewExpensesBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        final ExpenseListAdapter adapter = new ExpenseListAdapter(new ExpenseListAdapter.ExpenseDiff());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        Intent intent = getIntent();
+        loggedInUserId = intent.getIntExtra("ID", -1);
 
-        expenseViewModel = new ViewModelProvider(this).get(ExpenseLogViewModel.class);
+        repository = new ExpenseLogRepository(getApplication());
 
-        expenseViewModel.getAllExpensesById().observe(this, expenseLogs -> {
-            adapter.submitList(expenseLogs);
+        List<ExpenseLog> allUserExpenses = repository.getAllExpensesByUserId(loggedInUserId);
+        if (allUserExpenses.isEmpty()) {
+            binding.ExpenseListTextView.setText("Nothing to show, please enter expenses.");
+        }
+        StringBuilder sb = new StringBuilder();
+        for(ExpenseLog log: allUserExpenses) {
+            sb.append(log);
+        }
+
+        binding.ExpenseListTextView.setText(sb.toString());
+
+
+        binding.DoneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
         });
 
     }
