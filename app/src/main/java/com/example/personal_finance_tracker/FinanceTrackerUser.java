@@ -2,8 +2,8 @@ package com.example.personal_finance_tracker;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
 import com.example.personal_finance_tracker.DB.AppDataBase;
+import java.util.List;
 
 /**
  * This class represents a user of the finance tracker application.
@@ -13,6 +13,8 @@ import com.example.personal_finance_tracker.DB.AppDataBase;
 public class FinanceTrackerUser {
     @PrimaryKey(autoGenerate = true)
     private int userID;
+    private List<Pair<String, Float>> expenses;
+    private double budget;
 
     public FinanceTrackerUser(int userID) {
         this.userID = userID;
@@ -24,5 +26,21 @@ public class FinanceTrackerUser {
 
     public void setUserID(int userID) {
         this.userID = userID;
+    }
+
+    public List<Pair<String, Float>> getExpenses() {
+        return expenses;
+    }
+
+    public void setExpenses(List<Pair<String, Float>> expenses) {
+        this.expenses = expenses;
+    }
+
+    public double getBudget() {
+        return budget;
+    }
+
+    public void setBudget(double budget) {
+        this.budget = budget;
     }
 }
