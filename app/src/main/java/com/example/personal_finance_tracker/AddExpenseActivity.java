@@ -45,6 +45,13 @@ public class AddExpenseActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        binding.ReturnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void insertExpenseInfoRecord() {

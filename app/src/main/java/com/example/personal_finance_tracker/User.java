@@ -16,10 +16,13 @@ public class User {
     private String username;
     private String password;
 
-    public User(String email, String username, String password) {
+    private int budget;
+
+    public User(String email, String username, String password, int budget) {
         this.email = email;
         this.username = username;
         this.password = password;
+        this.budget = budget;
     }
     @Ignore
     public User(String email, String username, String password, boolean isAdmin) {
@@ -66,5 +69,13 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public int getBudget() {
+        return budget;
+    }
+
+    public void setBudget(int budget) {
+        this.budget = budget;
     }
 }

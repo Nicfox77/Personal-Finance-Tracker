@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AddBudgetActivity.class);
+                intent.putExtra("ID", userID);
                 startActivity(intent);
             }
         });
@@ -240,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("Admin user created");
         }
         if(financeTrackerDAO.getUserByUsername("default") == null) {
-            User defaultUser = new User("default", "default", "password");
+            User defaultUser = new User("default", "default", "password", 0);
             financeTrackerDAO.insert(defaultUser);
             System.out.println("default user created");
         }

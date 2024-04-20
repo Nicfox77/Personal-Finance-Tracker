@@ -62,6 +62,10 @@ public class ExpenseLogRepository {
         //TODO: Need to implement created in Recycler View Video
     }
 
+    public void updateUserBudget(int userID, int budget) {
+        financeTrackerDAO.updateTotalBudgetForUser(userID, budget);
+    }
+
     public static ExpenseLogRepository getRepository(Application application) {
         //TODO: Need to implement created in Recycler View Video
         return null;

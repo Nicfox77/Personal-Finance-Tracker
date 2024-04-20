@@ -63,4 +63,7 @@ public interface FinanceTrackerDAO {
 
     @Query("SELECT * FROM " + AppDataBase.USER_LOGIN_TABLE + " WHERE username = :username")
     User getUserByUsername(String username);
+
+    @Query("UPDATE " + AppDataBase.USER_LOGIN_TABLE + " SET budget = :newTotalBudget WHERE userId = :userId" )
+    void updateTotalBudgetForUser(int userId, int newTotalBudget);
 }

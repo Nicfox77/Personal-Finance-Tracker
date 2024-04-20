@@ -13,7 +13,7 @@ import java.util.List;
 public class FinanceTrackerUser {
     @PrimaryKey(autoGenerate = true)
     private int userID;
-    private List<Pair<String, Float>> expenses;
+//    private List<Pair<String, Float>> expenses;
     private double budget;
 
     public FinanceTrackerUser(int userID) {
@@ -28,13 +28,13 @@ public class FinanceTrackerUser {
         this.userID = userID;
     }
 
-    public List<Pair<String, Float>> getExpenses() {
-        return expenses;
-    }
+//    public List<Pair<String, Float>> getExpenses() {
+//        return expenses;
+//    }
 
-    public void setExpenses(List<Pair<String, Float>> expenses) {
-        this.expenses = expenses;
-    }
+//    public void setExpenses(List<Pair<String, Float>> expenses) {
+//        this.expenses = expenses;
+//    }
 
     public double getBudget() {
         return budget;
