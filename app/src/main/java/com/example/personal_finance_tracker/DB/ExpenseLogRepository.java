@@ -39,6 +39,22 @@ public class ExpenseLogRepository {
         return null;
     }
 
+    public List<ExpenseLog> getAllFormattedExpensesByUserId(int loggedInUserId) {
+        Future<ArrayList<ExpenseLog>> future = AppDataBase.databaseWriteExecutor.submit(
+                new Callable<ArrayList<ExpenseLog>>() {
+                    @Override
+                    public ArrayList<ExpenseLog> call() throws Exception {
+                        return (ArrayList<ExpenseLog>) financeTrackerDAO.getRecordSetUserId(loggedInUserId);
+                    }
+                });
+        try {
+            return future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            System.out.println("Error with future");
+        }
+        return null;
+    }
+
     public void insertExpenseLog(ExpenseLog expense) {
         AppDataBase.databaseWriteExecutor.execute(() -> {
             financeTrackerDAO.insert(expense);

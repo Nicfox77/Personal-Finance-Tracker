@@ -50,7 +50,8 @@ public class ViewExpensesActivity extends AppCompatActivity {
         }
         StringBuilder sb = new StringBuilder();
         for(ExpenseLog log: allUserExpenses) {
-            sb.append(log);
+            String formattedExpense = "$" + log.getAmount() + " -  " + log.getName() + "\n";
+            sb.append(formattedExpense);
         }
 
         binding.ExpenseListTextView.setText(sb.toString());
