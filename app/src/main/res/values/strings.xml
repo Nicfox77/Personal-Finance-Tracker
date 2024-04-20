@@ -24,4 +24,8 @@
     <string name="logout">Logout</string>
     <string name="are_you_sure_you_want_to_logout">Are you sure you want to logout?</string>
     <string name="no">No</string>
+    <string name="return_to_dashboard">Return to Dashboard</string>
+    <string name="transaction_name">Transaction Name</string>
+    <string name="amount">Amount</string>
+    <string name="update_budget">Update Budget</string>
 </resources>
