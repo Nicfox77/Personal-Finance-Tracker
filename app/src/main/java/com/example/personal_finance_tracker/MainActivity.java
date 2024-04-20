@@ -35,14 +35,13 @@ public class MainActivity extends AppCompatActivity {
     private TextView totalBudget;
     private TextView remainingBudget;
     private TextView dashboardTitle;
-    private Button addUserButton;
-    private Button deleteUserButton;
     private Button logoutButton;
+    private Button adminAddUserButton;
+    private Button adminDeleteUserButton;
 
 
     private FinanceTrackerDAO financeTrackerDAO;
 
-    private List<FinanceTrackerUser> users;
     private SharedPreferences prefs = null;
     private int userID = -1;
     private User user;
@@ -67,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             if(financeTrackerDAO.getUserLoginById(userID).isAdmin()){
-                addUserButton.setVisibility(View.VISIBLE);
-                deleteUserButton.setVisibility(View.VISIBLE);
+                adminAddUserButton.setVisibility(View.VISIBLE);
+                adminDeleteUserButton.setVisibility(View.VISIBLE);
             }
         }
         catch (Exception e){
@@ -106,6 +105,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 logoutUser();
+            }
+        });
+
+        adminAddUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AdminAddUser.class);
+                intent.putExtra("ID", userID);
+                startActivity(intent);
+            }
+        });
+
+        adminDeleteUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AdminDeleteUser.class);
+                intent.putExtra("ID", userID);
+                startActivity(intent);
             }
         });
 
@@ -171,9 +188,10 @@ public class MainActivity extends AppCompatActivity {
         totalBudget = binding.TotalBudgetAmountTextView;
         remainingBudget = binding.DiffAmountTextView;
         dashboardTitle = binding.DashboardTitleView;
-        addUserButton = binding.AddUserAdminButton;
-        deleteUserButton = binding.DeleteUserAdminButton;
         logoutButton = binding.logoutButton;
+        adminAddUserButton = binding.AddUserAdminButton;
+        adminDeleteUserButton = binding.DeleteUserAdminButton;
+
         try{
             dashboardTitle.setText(String.format("Welcome %s", financeTrackerDAO.getUserLoginById(userID).getUsername()));
         }catch (Exception e){
