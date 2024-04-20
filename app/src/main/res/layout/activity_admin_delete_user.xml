@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient"
-    tools:context=".AdminAddUser">
+    tools:context=".AdminDeleteUser">
 
     <View
         android:id="@+id/top_bg_view"
@@ -16,12 +16,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/CreateUserTitleTextView"
+        android:id="@+id/DeleteUserTitleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="30dp"
-        android:text="@string/create_user"
+        android:text="@string/delete_user"
         android:textColor="@color/light_gray"
         android:textSize="36sp"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,7 +35,7 @@
         android:text="@string/username"
         android:textColor="@color/dark_gray"
         app:layout_constraintStart_toStartOf="@+id/UserNameEditTextView"
-        app:layout_constraintTop_toBottomOf="@+id/CreateUserTitleTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/DeleteUserTitleTextView" />
 
     <EditText
         android:id="@+id/UserNameEditTextView"
@@ -53,33 +53,11 @@
 
 
     <TextView
-        android:id="@+id/PasswordTitleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:text="@string/password"
-        android:textColor="@color/dark_gray"
-        app:layout_constraintStart_toStartOf="@id/NewPasswordEditTextView"
-        app:layout_constraintTop_toBottomOf="@+id/NewEmailEditTextView" />
-
-    <TextView
-        android:id="@+id/ConfirmPasswordTitleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:text="@string/confirm_password"
-        android:textColor="@color/dark_gray"
-        app:layout_constraintStart_toStartOf="@id/NewPasswordEditTextView"
-        app:layout_constraintTop_toBottomOf="@+id/NewPasswordEditTextView" />
-
-    <TextView
         android:id="@+id/EmailTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="80dp"
         android:text="@string/email"
         android:textColor="@color/dark_gray"
         app:layout_constraintStart_toStartOf="@+id/NewEmailEditTextView"
@@ -89,57 +67,29 @@
         android:id="@+id/NewEmailEditTextView"
         android:layout_width="275dp"
         android:layout_height="45dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/edit_text_border"
         android:ems="10"
+        android:inputType="textEmailAddress"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:inputType="textEmailAddress"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/EmailTitleTextView" />
 
-    <EditText
-        android:id="@+id/NewPasswordEditTextView"
-        android:layout_width="275dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/edit_text_border"
-        android:ems="10"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PasswordTitleTextView" />
-
-    <EditText
-        android:id="@+id/ConfirmPasswordEditTextView"
-        android:layout_width="275dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/edit_text_border"
-        android:ems="10"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ConfirmPasswordTitleTextView" />
-
     <Button
-        android:id="@+id/CreateUserButton"
+        android:id="@+id/DeleteUserButton"
         android:layout_width="275dp"
         android:layout_height="60dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="116dp"
         android:background="@android:drawable/dialog_holo_light_frame"
         android:backgroundTint="@color/primary_blue"
-        android:text="@string/create_user"
+        android:text="@string/delete_user"
         android:textColor="@color/light_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ConfirmPasswordEditTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/NewEmailEditTextView" />
 
     <Button
         android:id="@+id/ReturnToDashboardButton"
@@ -152,7 +102,19 @@
         android:textColor="@color/light_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CreateUserButton" />
+        app:layout_constraintTop_toBottomOf="@+id/DeleteUserButton" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OR"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/EmailTitleTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UserNameEditTextView"
+        app:layout_constraintVertical_bias="0.675" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

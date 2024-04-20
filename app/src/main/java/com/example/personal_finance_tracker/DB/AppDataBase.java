@@ -10,12 +10,11 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.personal_finance_tracker.DB.entities.ExpenseLog;
 import com.example.personal_finance_tracker.User;
-import com.example.personal_finance_tracker.FinanceTrackerUser;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, ExpenseLog.class, FinanceTrackerUser.class}, version = 2)
+@Database(entities = {User.class, ExpenseLog.class}, version = 2)
 public abstract class AppDataBase extends RoomDatabase {
     public static final String DB_NAME = "finance_tracker.db";
     public static final String USER_LOGIN_TABLE = "user_login_table";

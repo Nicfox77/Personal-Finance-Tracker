@@ -19,7 +19,6 @@ public class AddExpenseActivity extends AppCompatActivity {
     private ActivityAddExpenseBinding binding;
     private ExpenseLogRepository repository;
 
-    private FinanceTrackerUser user;
 
     String description = "";
     int amount = 0;

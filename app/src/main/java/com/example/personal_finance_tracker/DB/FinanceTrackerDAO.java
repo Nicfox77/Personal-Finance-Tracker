@@ -9,7 +9,6 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.personal_finance_tracker.DB.entities.ExpenseLog;
-import com.example.personal_finance_tracker.FinanceTrackerUser;
 import com.example.personal_finance_tracker.User;
 
 import java.util.ArrayList;
@@ -46,11 +45,6 @@ public interface FinanceTrackerDAO {
     @Query("SELECT * FROM " + AppDataBase.USER_LOGIN_TABLE + " WHERE email = :email")
     User getUserByEmail(String email);
 
-    @Query("SELECT * FROM " + AppDataBase.USER_TABLE)
-    List<FinanceTrackerUser> getAllUsers();
-
-    @Query("SELECT * FROM " + AppDataBase.USER_TABLE + " WHERE userID = :userID")
-    List<FinanceTrackerUser> getUserByID(int userID);
 
     @Insert
     void insert(User ...users);

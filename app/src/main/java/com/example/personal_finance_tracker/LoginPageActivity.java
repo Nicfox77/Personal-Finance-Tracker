@@ -32,7 +32,6 @@ public class LoginPageActivity extends AppCompatActivity {
 
     private FinanceTrackerDAO financeTrackerDAO;
 
-    List<FinanceTrackerUser> users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

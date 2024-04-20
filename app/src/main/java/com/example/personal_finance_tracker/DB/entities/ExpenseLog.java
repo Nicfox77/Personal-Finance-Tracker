@@ -4,8 +4,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import com.example.personal_finance_tracker.DB.AppDataBase;
-import com.example.personal_finance_tracker.DB.FinanceTrackerDAO_Impl;
-import com.example.personal_finance_tracker.FinanceTrackerUser;
+
 
 import java.util.Objects;
 
