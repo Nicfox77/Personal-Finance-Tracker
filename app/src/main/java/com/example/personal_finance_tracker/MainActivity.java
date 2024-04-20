@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import com.example.personal_finance_tracker.DB.AppDataBase;
+import com.example.personal_finance_tracker.DB.ExpenseLogRepository;
 import com.example.personal_finance_tracker.DB.FinanceTrackerDAO;
 import com.example.personal_finance_tracker.DB.entities.ExpenseLog;
 import com.example.personal_finance_tracker.databinding.ActivityMainBinding;
@@ -281,10 +282,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public double totalExpenses(){
-        List<ExpenseLog> expenses = financeTrackerDAO.getRecordSetUserId(userID);
+        ExpenseLogRepository repository;
+        repository = new ExpenseLogRepository(getApplication());
+
+        List<ExpenseLog> allUserExpenses = repository.getAllExpensesByUserId(userID);
         double total = 0;
-        for(ExpenseLog expense : expenses){
-            total += expense.getAmount();
+        for(ExpenseLog log: allUserExpenses) {
+            total+= log.getAmount();
         }
         return total;
     }

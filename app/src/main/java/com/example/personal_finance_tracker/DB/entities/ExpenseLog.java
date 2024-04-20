@@ -23,7 +23,7 @@ public class ExpenseLog {
     }
 
 
-    public ExpenseLog(String name, int amount, int userId) {
+    public ExpenseLog(String name, double amount, int userId) {
         this.name = name;
         this.amount = amount;
         this.userId = userId;
@@ -45,7 +45,7 @@ public class ExpenseLog {
         this.name = name;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
