@@ -47,7 +47,7 @@ public class AddBudgetActivity extends AppCompatActivity {
         binding.ReturnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                repository.updateUserBudget(loggedInUserId, newBudget);
+                finish();
             }
         });
     }
@@ -61,6 +61,6 @@ public class AddBudgetActivity extends AppCompatActivity {
     }
 
     private void updateUserBudget() {
-
+        repository.updateUserBudget(loggedInUserId, newBudget);
     }
 }
